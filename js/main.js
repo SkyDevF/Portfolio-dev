@@ -255,8 +255,8 @@ const optimizedScrollHandler = debounce(function() {
 
 // Use optimized scroll handler for better performance
 window.addEventListener('scroll', optimizedScrollHandler);
-// =====
- SCROLL-TRIGGERED ANIMATIONS =====
+
+// ===== SCROLL-TRIGGERED ANIMATIONS =====
 
 // Intersection Observer for scroll animations
 function initScrollAnimations() {
@@ -401,8 +401,9 @@ window.addEventListener('resize', debounce(function() {
     if (window.innerWidth > 768) {
         initAboutMeParallax();
     }
-}, 250));// ==
-=== PROFILE IMAGE ERROR HANDLING =====
+}, 250));
+
+// ===== PROFILE IMAGE ERROR HANDLING =====
 function initProfileImageHandling() {
     const profileImg = document.querySelector('.profile-img');
     if (!profileImg) return;
@@ -426,8 +427,8 @@ function initProfileImageHandling() {
         profileImg.dispatchEvent(new Event('error'));
     }
 }
-// 
-===== ADVANCED VISUAL EFFECTS =====
+
+// ===== ADVANCED VISUAL EFFECTS =====
 
 // Particle system for background
 function initParticleSystem() {
@@ -920,8 +921,9 @@ function initLoadingAnimation() {
 }
 
 // Initialize loading animation immediately
-initLoadingAnimation();// ===== 
-SCROLL TO TOP BUTTON FUNCTIONALITY =====
+initLoadingAnimation();
+
+// ===== SCROLL TO TOP BUTTON FUNCTIONALITY =====
 function initScrollToTopButton() {
     // Create scroll to top button if it doesn't exist
     let scrollToTopBtn = document.getElementById('scrollToTop');
@@ -966,3 +968,818 @@ function initScrollToTopButton() {
 document.addEventListener('DOMContentLoaded', function() {
     initScrollToTopButton();
 });
+
+// ===== STARRY NIGHT BACKGROUND SYSTEM =====
+
+// Stars and shooting stars management
+class StarryNight {
+    constructor() {
+        this.starsContainer = document.getElementById('starsContainer');
+        this.stars = [];
+        this.shootingStars = [];
+        this.constellations = [];
+        this.particles = [];
+        this.isLightMode = false;
+        
+        this.init();
+    }
+    
+    init() {
+        if (!this.starsContainer) return;
+        
+        this.createStars();
+        this.createConstellations();
+        this.startShootingStars();
+        this.createFloatingParticles();
+        this.handleResize();
+    }
+    
+    createStars() {
+        const starCount = Math.min(150, Math.floor(window.innerWidth * window.innerHeight / 8000));
+        
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            
+            // Random star size
+            const size = Math.random();
+            if (size < 0.6) {
+                star.classList.add('small');
+            } else if (size < 0.9) {
+                star.classList.add('medium');
+            } else {
+                star.classList.add('large');
+            }
+            
+            // Random position
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            
+            // Random animation delay
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = (2 + Math.random() * 3) + 's';
+            
+            this.starsContainer.appendChild(star);
+            this.stars.push(star);
+        }
+    }
+    
+    createConstellations() {
+        const constellationCount = 3;
+        
+        for (let i = 0; i < constellationCount; i++) {
+            const constellation = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            constellation.className = 'constellation';
+            constellation.style.position = 'absolute';
+            constellation.style.width = '200px';
+            constellation.style.height = '150px';
+            constellation.style.left = Math.random() * (window.innerWidth - 200) + 'px';
+            constellation.style.top = Math.random() * (window.innerHeight - 150) + 'px';
+            
+            // Create constellation pattern
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.className = 'constellation-line';
+            
+            // Simple constellation patterns
+            const patterns = [
+                'M20,50 L60,30 L100,60 L140,20 L180,70',
+                'M30,40 L80,20 L120,80 L160,40 L180,90',
+                'M40,30 L90,70 L140,30 L170,80 L190,50'
+            ];
+            
+            path.setAttribute('d', patterns[i % patterns.length]);
+            constellation.appendChild(path);
+            
+            this.starsContainer.appendChild(constellation);
+            this.constellations.push(constellation);
+        }
+    }
+    
+    createShootingStar() {
+        const shootingStar = document.createElement('div');
+        shootingStar.className = 'shooting-star';
+        
+        // Random starting position (top area)
+        shootingStar.style.left = Math.random() * window.innerWidth + 'px';
+        shootingStar.style.top = Math.random() * (window.innerHeight * 0.3) + 'px';
+        
+        // Random animation duration
+        shootingStar.style.animationDuration = (2 + Math.random() * 2) + 's';
+        
+        this.starsContainer.appendChild(shootingStar);
+        this.shootingStars.push(shootingStar);
+        
+        // Remove after animation
+        setTimeout(() => {
+            if (shootingStar.parentNode) {
+                shootingStar.parentNode.removeChild(shootingStar);
+            }
+            const index = this.shootingStars.indexOf(shootingStar);
+            if (index > -1) {
+                this.shootingStars.splice(index, 1);
+            }
+        }, 3000);
+    }
+    
+    startShootingStars() {
+        const createShootingStarInterval = () => {
+            if (!this.isLightMode) {
+                this.createShootingStar();
+            }
+            
+            // Random interval between 3-8 seconds
+            const nextInterval = 3000 + Math.random() * 5000;
+            setTimeout(createShootingStarInterval, nextInterval);
+        };
+        
+        // Start first shooting star after 2 seconds
+        setTimeout(createShootingStarInterval, 2000);
+    }
+    
+    createFloatingParticles() {
+        const particleCount = Math.min(20, Math.floor(window.innerWidth / 100));
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = 2 + Math.random() * 4;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            particle.style.animationDuration = (4 + Math.random() * 4) + 's';
+            
+            this.starsContainer.appendChild(particle);
+            this.particles.push(particle);
+        }
+    }
+    
+    toggleTheme(isLight) {
+        this.isLightMode = isLight;
+        
+        if (isLight) {
+            this.starsContainer.style.opacity = '0.1';
+        } else {
+            this.starsContainer.style.opacity = '1';
+        }
+    }
+    
+    handleResize() {
+        window.addEventListener('resize', debounce(() => {
+            // Reposition constellations on resize
+            this.constellations.forEach(constellation => {
+                constellation.style.left = Math.random() * (window.innerWidth - 200) + 'px';
+                constellation.style.top = Math.random() * (window.innerHeight - 150) + 'px';
+            });
+        }, 250));
+    }
+    
+    destroy() {
+        // Clean up all elements
+        this.stars.forEach(star => star.remove());
+        this.shootingStars.forEach(star => star.remove());
+        this.constellations.forEach(constellation => constellation.remove());
+        this.particles.forEach(particle => particle.remove());
+        
+        this.stars = [];
+        this.shootingStars = [];
+        this.constellations = [];
+        this.particles = [];
+    }
+}
+
+// ===== DARK/LIGHT MODE SYSTEM =====
+
+class ThemeManager {
+    constructor() {
+        this.themeToggle = document.getElementById('themeToggle');
+        this.currentTheme = localStorage.getItem('theme') || 'dark';
+        this.starryNight = null;
+        
+        this.init();
+    }
+    
+    init() {
+        // Set initial theme
+        this.setTheme(this.currentTheme);
+        
+        // Add event listener
+        if (this.themeToggle) {
+            this.themeToggle.addEventListener('click', () => {
+                this.toggleTheme();
+            });
+            
+            // Add touch support for mobile
+            this.themeToggle.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                this.addTouchFeedback();
+            }, { passive: false });
+            
+            // Add keyboard support
+            this.themeToggle.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.toggleTheme();
+                }
+            });
+        }
+        
+        // Listen for system theme changes
+        if (window.matchMedia) {
+            const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            mediaQuery.addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    this.setTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        }
+    }
+    
+    setTheme(theme) {
+        this.currentTheme = theme;
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        
+        // Update starry night visibility
+        if (this.starryNight) {
+            this.starryNight.toggleTheme(theme === 'light');
+        }
+        
+        // Update theme toggle button
+        this.updateToggleButton();
+        
+        // Dispatch theme change event
+        window.dispatchEvent(new CustomEvent('themeChanged', { 
+            detail: { theme: theme } 
+        }));
+    }
+    
+    toggleTheme() {
+        const newTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
+        this.setTheme(newTheme);
+        
+        // Add pressed state and ripple effect
+        if (this.themeToggle) {
+            // Add pressed class
+            this.themeToggle.classList.add('pressed');
+            this.themeToggle.classList.add('ripple');
+            
+            // Remove pressed state after animation
+            setTimeout(() => {
+                this.themeToggle.classList.remove('pressed');
+            }, 200);
+            
+            // Remove ripple effect
+            setTimeout(() => {
+                this.themeToggle.classList.remove('ripple');
+            }, 300);
+        }
+    }
+    
+    updateToggleButton() {
+        if (!this.themeToggle) return;
+        
+        const sunIcon = this.themeToggle.querySelector('.sun-icon');
+        const moonIcon = this.themeToggle.querySelector('.moon-icon');
+        
+        if (this.currentTheme === 'light') {
+            if (sunIcon) sunIcon.style.display = 'block';
+            if (moonIcon) moonIcon.style.display = 'none';
+        } else {
+            if (sunIcon) sunIcon.style.display = 'none';
+            if (moonIcon) moonIcon.style.display = 'block';
+        }
+    }
+    
+    setStarryNight(starryNight) {
+        this.starryNight = starryNight;
+        this.starryNight.toggleTheme(this.currentTheme === 'light');
+    }
+    
+    addTouchFeedback() {
+        if (this.themeToggle) {
+            this.themeToggle.classList.add('pressed');
+            setTimeout(() => {
+                this.themeToggle.classList.remove('pressed');
+                this.toggleTheme();
+            }, 100);
+        }
+    }
+}
+
+// ===== ENHANCED VISUAL EFFECTS =====
+
+// Cursor trail effect
+class CursorTrail {
+    constructor() {
+        this.trail = [];
+        this.maxTrail = 10;
+        this.isActive = window.innerWidth > 768; // Only on desktop
+        
+        if (this.isActive) {
+            this.init();
+        }
+    }
+    
+    init() {
+        document.addEventListener('mousemove', (e) => {
+            this.addTrailPoint(e.clientX, e.clientY);
+        });
+        
+        this.animate();
+    }
+    
+    addTrailPoint(x, y) {
+        const point = document.createElement('div');
+        point.className = 'cursor-trail-point';
+        point.style.cssText = `
+            position: fixed;
+            left: ${x}px;
+            top: ${y}px;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+        `;
+        
+        document.body.appendChild(point);
+        this.trail.push({ element: point, life: 1 });
+        
+        if (this.trail.length > this.maxTrail) {
+            const oldest = this.trail.shift();
+            if (oldest.element.parentNode) {
+                oldest.element.parentNode.removeChild(oldest.element);
+            }
+        }
+    }
+    
+    animate() {
+        this.trail.forEach((point, index) => {
+            point.life -= 0.05;
+            point.element.style.opacity = point.life;
+            point.element.style.transform = `translate(-50%, -50%) scale(${point.life})`;
+            
+            if (point.life <= 0) {
+                if (point.element.parentNode) {
+                    point.element.parentNode.removeChild(point.element);
+                }
+                this.trail.splice(index, 1);
+            }
+        });
+        
+        requestAnimationFrame(() => this.animate());
+    }
+}
+
+// Text shimmer effect
+function addTextShimmerEffect() {
+    const style = document.createElement('style');
+    style.textContent = `
+        .text-shimmer {
+            background: linear-gradient(
+                90deg,
+                var(--text-gray) 0%,
+                var(--light-blue) 50%,
+                var(--text-gray) 100%
+            );
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        .hero-title:hover {
+            animation: shimmer 1.5s ease-in-out infinite;
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Parallax scrolling effect
+function initParallaxScrolling() {
+    const parallaxElements = document.querySelectorAll('.hero, .about, .projects');
+    
+    function updateParallax() {
+        const scrolled = window.pageYOffset;
+        
+        parallaxElements.forEach((element, index) => {
+            const rate = scrolled * -0.5 * (index + 1) * 0.1;
+            element.style.transform = `translateY(${rate}px)`;
+        });
+    }
+    
+    let ticking = false;
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+            setTimeout(() => { ticking = false; }, 16);
+        }
+    }
+    
+    window.addEventListener('scroll', requestTick, { passive: true });
+}
+
+// ===== STARRY NIGHT BACKGROUND SYSTEM =====
+
+// Stars and shooting stars management
+class StarryNight {
+    constructor() {
+        this.starsContainer = document.getElementById('starsContainer');
+        this.stars = [];
+        this.shootingStars = [];
+        this.constellations = [];
+        this.particles = [];
+        this.isLightMode = false;
+        
+        this.init();
+    }
+    
+    init() {
+        if (!this.starsContainer) return;
+        
+        this.createStars();
+        this.createConstellations();
+        this.startShootingStars();
+        this.createFloatingParticles();
+        this.handleResize();
+    }
+    
+    createStars() {
+        const starCount = Math.min(150, Math.floor(window.innerWidth * window.innerHeight / 8000));
+        
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            
+            // Random star size
+            const size = Math.random();
+            if (size < 0.6) {
+                star.classList.add('small');
+            } else if (size < 0.9) {
+                star.classList.add('medium');
+            } else {
+                star.classList.add('large');
+            }
+            
+            // Random position
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            
+            // Random animation delay
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = (2 + Math.random() * 3) + 's';
+            
+            this.starsContainer.appendChild(star);
+            this.stars.push(star);
+        }
+    }
+    
+    createConstellations() {
+        const constellationCount = 3;
+        
+        for (let i = 0; i < constellationCount; i++) {
+            const constellation = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            constellation.className = 'constellation';
+            constellation.style.position = 'absolute';
+            constellation.style.width = '200px';
+            constellation.style.height = '150px';
+            constellation.style.left = Math.random() * (window.innerWidth - 200) + 'px';
+            constellation.style.top = Math.random() * (window.innerHeight - 150) + 'px';
+            
+            // Create constellation pattern
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.className = 'constellation-line';
+            
+            // Simple constellation patterns
+            const patterns = [
+                'M20,50 L60,30 L100,60 L140,20 L180,70',
+                'M30,40 L80,20 L120,80 L160,40 L180,90',
+                'M40,30 L90,70 L140,30 L170,80 L190,50'
+            ];
+            
+            path.setAttribute('d', patterns[i % patterns.length]);
+            constellation.appendChild(path);
+            
+            this.starsContainer.appendChild(constellation);
+            this.constellations.push(constellation);
+        }
+    }
+    
+    createShootingStar() {
+        const shootingStar = document.createElement('div');
+        shootingStar.className = 'shooting-star';
+        
+        // Random starting position (top area)
+        shootingStar.style.left = Math.random() * window.innerWidth + 'px';
+        shootingStar.style.top = Math.random() * (window.innerHeight * 0.3) + 'px';
+        
+        // Random animation duration
+        shootingStar.style.animationDuration = (2 + Math.random() * 2) + 's';
+        
+        this.starsContainer.appendChild(shootingStar);
+        this.shootingStars.push(shootingStar);
+        
+        // Remove after animation
+        setTimeout(() => {
+            if (shootingStar.parentNode) {
+                shootingStar.parentNode.removeChild(shootingStar);
+            }
+            const index = this.shootingStars.indexOf(shootingStar);
+            if (index > -1) {
+                this.shootingStars.splice(index, 1);
+            }
+        }, 3000);
+    }
+    
+    startShootingStars() {
+        const createShootingStarInterval = () => {
+            if (!this.isLightMode) {
+                this.createShootingStar();
+            }
+            
+            // Random interval between 3-8 seconds
+            const nextInterval = 3000 + Math.random() * 5000;
+            setTimeout(createShootingStarInterval, nextInterval);
+        };
+        
+        // Start first shooting star after 2 seconds
+        setTimeout(createShootingStarInterval, 2000);
+    }
+    
+    createFloatingParticles() {
+        const particleCount = Math.min(20, Math.floor(window.innerWidth / 100));
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = 2 + Math.random() * 4;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            particle.style.animationDuration = (4 + Math.random() * 4) + 's';
+            
+            this.starsContainer.appendChild(particle);
+            this.particles.push(particle);
+        }
+    }
+    
+    toggleTheme(isLight) {
+        this.isLightMode = isLight;
+        
+        if (isLight) {
+            this.starsContainer.style.opacity = '0.1';
+        } else {
+            this.starsContainer.style.opacity = '1';
+        }
+    }
+    
+    handleResize() {
+        window.addEventListener('resize', debounce(() => {
+            // Reposition constellations on resize
+            this.constellations.forEach(constellation => {
+                constellation.style.left = Math.random() * (window.innerWidth - 200) + 'px';
+                constellation.style.top = Math.random() * (window.innerHeight - 150) + 'px';
+            });
+        }, 250));
+    }
+}
+
+// ===== DARK/LIGHT MODE SYSTEM =====
+
+class ThemeManager {
+    constructor() {
+        this.themeToggle = document.getElementById('themeToggle');
+        this.currentTheme = localStorage.getItem('theme') || 'dark';
+        this.starryNight = null;
+        
+        this.init();
+    }
+    
+    init() {
+        // Set initial theme
+        this.setTheme(this.currentTheme);
+        
+        // Add event listener
+        if (this.themeToggle) {
+            this.themeToggle.addEventListener('click', () => {
+                this.toggleTheme();
+            });
+            
+            // Add touch support for mobile
+            this.themeToggle.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                this.addTouchFeedback();
+            }, { passive: false });
+            
+            // Add keyboard support
+            this.themeToggle.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.toggleTheme();
+                }
+            });
+        }
+        
+        // Listen for system theme changes
+        if (window.matchMedia) {
+            const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            mediaQuery.addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    this.setTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        }
+    }
+    
+    setTheme(theme) {
+        this.currentTheme = theme;
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        
+        // Update starry night visibility
+        if (this.starryNight) {
+            this.starryNight.toggleTheme(theme === 'light');
+        }
+        
+        // Update theme toggle button
+        this.updateToggleButton();
+        
+        // Dispatch theme change event
+        window.dispatchEvent(new CustomEvent('themeChanged', { 
+            detail: { theme: theme } 
+        }));
+    }
+    
+    toggleTheme() {
+        const newTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
+        this.setTheme(newTheme);
+        
+        // Add pressed state and ripple effect
+        if (this.themeToggle) {
+            // Add pressed class
+            this.themeToggle.classList.add('pressed');
+            this.themeToggle.classList.add('ripple');
+            
+            // Remove pressed state after animation
+            setTimeout(() => {
+                this.themeToggle.classList.remove('pressed');
+            }, 200);
+            
+            // Remove ripple effect
+            setTimeout(() => {
+                this.themeToggle.classList.remove('ripple');
+            }, 300);
+        }
+    }
+    
+    updateToggleButton() {
+        if (!this.themeToggle) return;
+        
+        const sunIcon = this.themeToggle.querySelector('.sun-icon');
+        const moonIcon = this.themeToggle.querySelector('.moon-icon');
+        
+        if (this.currentTheme === 'light') {
+            if (sunIcon) sunIcon.style.display = 'block';
+            if (moonIcon) moonIcon.style.display = 'none';
+        } else {
+            if (sunIcon) sunIcon.style.display = 'none';
+            if (moonIcon) moonIcon.style.display = 'block';
+        }
+    }
+    
+    setStarryNight(starryNight) {
+        this.starryNight = starryNight;
+        this.starryNight.toggleTheme(this.currentTheme === 'light');
+    }
+    
+    addTouchFeedback() {
+        if (this.themeToggle) {
+            this.themeToggle.classList.add('pressed');
+            setTimeout(() => {
+                this.themeToggle.classList.remove('pressed');
+                this.toggleTheme();
+            }, 100);
+        }
+    }
+}
+
+// ===== INITIALIZATION =====
+
+// Initialize all systems when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize theme manager
+    const themeManager = new ThemeManager();
+    
+    // Initialize starry night background
+    const starryNight = new StarryNight();
+    themeManager.setStarryNight(starryNight);
+    
+    // Initialize cursor trail (desktop only)
+    if (window.innerWidth > 768 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        new CursorTrail();
+    }
+    
+    // Add text shimmer effects
+    addTextShimmerEffect();
+    
+    // Initialize parallax scrolling (desktop only)
+    if (window.innerWidth > 768) {
+        initParallaxScrolling();
+    }
+    
+    // Add smooth transitions to all interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, .btn, .project-card, .skill-item');
+    interactiveElements.forEach(element => {
+        element.style.transition = 'all 0.3s ease';
+    });
+});
+
+// Handle window resize for responsive features
+window.addEventListener('resize', debounce(function() {
+    const isMobile = window.innerWidth <= 768;
+    
+    // Hide/show cursor trail based on screen size
+    const trailPoints = document.querySelectorAll('.cursor-trail-point');
+    trailPoints.forEach(point => {
+        point.style.display = isMobile ? 'none' : 'block';
+    });
+    
+    // Reinitialize parallax on desktop
+    if (!isMobile) {
+        initParallaxScrolling();
+    }
+}, 250));
+
+// Performance optimization: Reduce animations on low-end devices
+if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
+    document.documentElement.style.setProperty('--transition-normal', '0.15s ease');
+    document.documentElement.style.setProperty('--transition-slow', '0.25s ease');
+}
+
+// Add loading performance tracking
+window.addEventListener('load', function() {
+    const loadTime = performance.now();
+    console.log(`🌟 Starry Night Portfolio loaded in ${Math.round(loadTime)}ms`);
+    
+    // Add loaded class for any final animations
+    document.body.classList.add('loaded');
+});
+
+// Keyboard accessibility for theme toggle
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'T' && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.click();
+        }
+    }
+});
+
+// Add focus styles for better accessibility
+const style = document.createElement('style');
+style.textContent = `
+    .theme-toggle:focus {
+        outline: 2px solid var(--primary-blue);
+        outline-offset: 2px;
+    }
+    
+    .nav-link:focus,
+    .btn:focus {
+        outline: 2px solid var(--primary-blue);
+        outline-offset: 2px;
+        box-shadow: var(--glow-blue);
+    }
+    
+    /* Smooth theme transition */
+    * {
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+    
+    /* Loading state */
+    body:not(.loaded) .stars-container {
+        opacity: 0;
+        animation: fadeIn 1s ease-in-out 0.5s forwards;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+`;
+document.head.appendChild(style);

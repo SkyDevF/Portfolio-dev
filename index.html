@@ -16,7 +16,6 @@
     <meta property="og:description" content="สร้างแอปและเว็บไซต์ ใช้งานได้จริง">
     <meta property="og:type" content="website">
     <meta property="og:url" content="">
-
     <title>Thitiwut Prasreothsin(Sky) - Web & Mobile Developer</title>
 
     <!-- CSS Links -->
@@ -24,11 +23,16 @@
 </head>
 
 <body>
+    <!-- Stars Background -->
+    <div class="stars-container" id="starsContainer"></div>
+
+    
+
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="#home">Sky</a>
+                <a href="#home">Portfolio</a>
             </div>
             <ul class="nav-menu">
                 <li class="nav-item">
@@ -63,12 +67,11 @@
         <!-- Hero Section -->
         <section id="home" class="hero">
             <div class="hero-container">
-                <h1 class="hero-title">Thitiwut Prasreothsin (Sky)</h1>
+                <h1 class="hero-title">Thitiwut Prasreothsin</h1>
                 <h2 class="hero-subtitle">Web & Mobile Developer</h2>
                 <p class="hero-tagline">สร้างแอปและเว็บไซต์ให้ล้ำ ใช้งานได้จริง</p>
                 <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">ดูผลงาน</a>
-                    <a href="#contact" class="btn btn-secondary">ติดต่อฉัน</a>
+                    <a href="#about" class="btn btn-primary">เกี่ยวกับฉัน</a>
                 </div>
             </div>
         </section>
@@ -90,29 +93,41 @@
                             </div>
                         </div>
                         <div class="profile-info">
-                            <h1 class="profile-name">Thitiwut Prasreothsin</h1>
-                            <p class="profile-nickname">aka "Sky"</p>
+                            <h1 class="profile-name">ธิติวุฒิ ประเสริฐศิลป์</h1>
+                            <p class="profile-nickname">ชื่อเล่น "สกาย" อายุ 21 ปี</p>
                             <div class="profile-role">
                                 <span class="role-icon">⚡</span>
-                                <span class="role-text">Full-Stack Developer</span>
+                                <span class="role-text">Web & Mobile Developer</span>
                             </div>
                             <p class="profile-bio">
-                                สร้างสรรค์เว็บไซต์และแอปพลิเคชันที่ทันสมัย<br>
-                                ด้วยเทคโนโลยีล้ำสมัยและการออกแบบที่โดดเด่น
+                                ผมชื่อ นายธิติวุฒิ ประเสริฐศิลป์ มีความสนใจด้านการพัฒนาแอปพลิเคชันและเว็บไซต์
+                                โดยเฉพาะ Mobile
+                                Application ด้วย Flutter ภาษาdart
+                                ผมมีเป้าหมายในการสร้างแอปพลิเคชันที่ใช้งานได้จริงและเป็นประโยชน์ต่อผู้ใช้
+
                             </p>
 
                             <!-- Portfolio Links -->
                             <div class="portfolio-links">
-                                <a href="https://teeneebuengkan.netlify.app/" target="_blank"
-                                    class="portfolio-link web-link">
-                                    <span class="link-icon">🌐</span>
-                                    <span class="link-text">Web Portfolio</span>
+                                <a href="https://github.com/SkyDevF" target="_blank" class="portfolio-link web-link">
+                                    <span class="link-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                            <path
+                                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                        </svg>
+                                    </span>
+                                    <span class="link-text">Github</span>
                                     <span class="link-arrow">→</span>
                                 </a>
-                                <a href="https://github.com/SkyDevF/kinroo" target="_blank"
+                                <a href="https://www.facebook.com/slo.sko.3/" target="_blank"
                                     class="portfolio-link app-link">
-                                    <span class="link-icon">📱</span>
-                                    <span class="link-text">Kinroo App</span>
+                                    <span class="link-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                            <path
+                                                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                                        </svg>
+                                    </span>
+                                    <span class="link-text">Facebook</span>
                                     <span class="link-arrow">→</span>
                                 </a>
                             </div>
@@ -128,8 +143,8 @@
                             <h3>Frontend</h3>
                         </div>
                         <div class="tech-stack">
-                            <span class="tech-item">HTML5</span>
-                            <span class="tech-item">CSS3</span>
+                            <span class="tech-item">HTML</span>
+                            <span class="tech-item">CSS</span>
                             <span class="tech-item">JavaScript</span>
                             <span class="tech-item">Flutter</span>
                         </div>
@@ -144,7 +159,8 @@
                             <span class="tech-item">Firebase</span>
                             <span class="tech-item">Node.js</span>
                             <span class="tech-item">API Design</span>
-                            <span class="tech-item">Database</span>
+                            <span class="tech-item">supabase</span>
+                            <span class="tech-item">xampp</span>
                         </div>
                     </div>
 
@@ -156,7 +172,7 @@
                         <div class="tech-stack">
                             <span class="tech-item">UI/UX</span>
                             <span class="tech-item">Figma</span>
-                            <span class="tech-item">Responsive</span>
+                            <span class="tech-item">Canva</span>
                             <span class="tech-item">Animation</span>
                         </div>
                     </div>
@@ -175,7 +191,8 @@
                             <img src="images/teeneebuengkanteeneebuengkan.png" alt="TeeneeBuengkan Website"
                                 class="project-cover">
                             <div class="project-overlay">
-                                <a href="#" class="project-link btn btn-primary" target="_blank">ดูเว็บไซต์</a>
+                                <a href="https://teeneebuengkan.netlify.app/" target="_blank"
+                                    class="project-link">ดูเว็บไซต์</a>
                             </div>
                         </div>
                         <div class="project-content">
@@ -215,8 +232,13 @@
                             </div>
                         </div>
                         <div class="project-content">
-                            <h3 class="project-title">Kinroo App</h3>
+                            <h3 class="project-title">
+                                <a href="https://github.com/SkyDevF/kinroo" target="_blank">Kinroo App</a>
+                            </h3>
                             <p class="project-description">แอปพลิเคชันตรวจจับเมนูอาหารด้วย AI และคำนวณแคลอรี่</p>
+                            <div class="project-links">
+
+                            </div>
                             <div class="project-features">
                                 <h4>ฟีเจอร์หลัก:</h4>
                                 <ul>
@@ -253,6 +275,7 @@
                     <div class="skill-item">JavaScript</div>
                     <div class="skill-item">Node.js</div>
                     <div class="skill-item">HTML/CSS</div>
+                    <div class="skill-item">Python</div>
                     <div class="skill-item">Git</div>
                     <div class="skill-item">Figma</div>
                     <div class="skill-item">TensorFlow Lite</div>
@@ -268,7 +291,7 @@
                 <h2 class="section-title">การศึกษา</h2>
                 <div class="education-content">
                     <div class="education-item neon-glow-card">
-                        <h3 class="degree">ปริญญาตรี วิศวกรรมคอมพิวเตอร์และอิเล็กทรอนิกส์</h3>
+                        <h3 class="degree">ปริญญาตรี สาขาวิศวกรรมคอมพิวเตอร์และอิเล็กทรอนิกส์</h3>
                         <h4 class="university">มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน วิทยาเขตสกลนคร</h4>
                         <p class="period">ปีการศึกษา 2565–2569</p>
                         <p class="gpa">เกรดเฉลี่ย: 3.38</p>
@@ -282,41 +305,66 @@
             <div class="container">
                 <h2 class="section-title">ติดต่อฉัน</h2>
                 <div class="contact-content">
-                    <div class="contact-info">
-                        <div class="contact-item">
+                    <div class="contact-hero">
+                        <p class="contact-description">พร้อมสร้างสรรค์โปรเจกต์ใหม่ร่วมกัน หรือมีคำถามเกี่ยวกับผลงาน?</p>
+                        <p class="contact-subtitle">ติดต่อมาได้เลย!</p>
+                    </div>
+
+                    <div class="contact-grid">
+                        <div class="contact-item neon-glow-card">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                                </svg>
+                            </div>
                             <h3>อีเมล</h3>
-                            <p><a href="mailto:Thitiwoot11111@gmail.com">Thitiwoot11111@gmail.com</a></p>
+                            <p><a href="mailto:Thitiwoot11111@gmail.com"
+                                    class="contact-link">Thitiwoot11111@gmail.com</a></p>
                         </div>
-                        <div class="contact-item">
+
+                        <div class="contact-item neon-glow-card">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                                </svg>
+                            </div>
                             <h3>โทรศัพท์</h3>
-                            <p><a href="tel:0659910940">065-991-0940</a></p>
+                            <p><a href="tel:0659910940" class="contact-link">065-991-0940</a></p>
                         </div>
-                        <div class="contact-item">
+
+                        <div class="contact-item neon-glow-card">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                                </svg>
+                            </div>
                             <h3>โซเชียลมีเดีย</h3>
                             <div class="social-links">
                                 <a href="https://www.facebook.com/slo.sko.3" target="_blank" rel="noopener"
-                                    class="social-link">Facebook</a>
-                                <a href="https://github.com/SkyDevF" target="_blank" rel="noopener"
-                                    class="social-link">GitHub</a>
+                                    class="social-link">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                                    </svg>
+                                    <span>Facebook</span>
+                                </a>
+                                <a href="https://github.com/SkyDevF" target="_blank" rel="noopener" class="social-link">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                    </svg>
+                                    <span>GitHub</span>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div class="contact-form">
-                        <form id="contactForm">
-                            <div class="form-group">
-                                <label for="name">ชื่อ</label>
-                                <input type="text" id="name" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">อีเมล</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">ข้อความ</label>
-                                <textarea id="message" name="message" rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">ส่งข้อความ</button>
-                        </form>
+
+                    <div class="contact-cta">
+                        <p class="cta-text">มาร่วมสร้างสรรค์โปรเจกต์ที่น่าตื่นเต้นไปด้วยกัน!</p>
+                        <a href="mailto:Thitiwoot11111@gmail.com" class="btn btn-primary">ส่งอีเมลหาฉัน</a>
                     </div>
                 </div>
             </div>
