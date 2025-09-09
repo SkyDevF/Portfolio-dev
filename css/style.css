@@ -1581,19 +1581,24 @@ body {
 .hero-title {
   font-size: var(--fs-5xl);
   margin-bottom: var(--spacing-lg);
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: var(--glow-text);
+  color: var(--accent-blue);
+  font-weight: 800;
+  text-shadow: 
+    0 0 20px rgba(147, 197, 253, 0.8),
+    0 0 40px rgba(59, 130, 246, 0.6),
+    2px 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 1px;
+  line-height: 1.1;
 }
 
 .hero-subtitle {
   font-size: var(--fs-2xl);
-  color: var(--light-purple);
+  color: var(--light-blue);
   margin-bottom: var(--spacing-md);
   font-family: var(--font-primary);
-  font-weight: 500;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+  margin-top: var(--spacing-md);
 }
 
 .hero-tagline {
@@ -1823,13 +1828,15 @@ body {
 /* Enhanced gradient text effect for hero titles */
 .hero-title {
   position: relative;
-  background: linear-gradient(135deg, var(--primary-purple), var(--light-purple), var(--secondary-purple));
+  background: linear-gradient(135deg, var(--accent-blue), var(--light-blue), var(--secondary-blue));
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: gradientShift 4s ease-in-out infinite;
   text-shadow: none;
+  /* Fallback for browsers that don't support background-clip */
+  color: var(--accent-blue);
 }
 
 .hero-title::after {
@@ -1897,6 +1904,20 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    color: white;
+  }
+}
+
+/* Fallback for browsers that don't support background-clip */
+@supports not (-webkit-background-clip: text) {
+  .hero-title {
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+    color: var(--accent-blue) !important;
+    text-shadow: 
+      0 0 20px rgba(147, 197, 253, 0.8),
+      0 0 40px rgba(59, 130, 246, 0.6),
+      2px 2px 4px rgba(0, 0, 0, 0.5) !important;
   }
 
   .hero-buttons .btn-primary {
@@ -7460,5 +7481,44 @@ DITIONAL BLUE THEME ENHANCEMENTS ===== */
   .neon-glow-card {
     border: 1px solid #ccc;
     box-shadow: none;
+  }
+}/* 
+===== MOBILE RESPONSIVE HERO STYLES ===== */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: var(--fs-4xl);
+    color: var(--accent-blue);
+    text-shadow: 
+      0 0 15px rgba(147, 197, 253, 0.9),
+      0 0 30px rgba(59, 130, 246, 0.7),
+      1px 1px 3px rgba(0, 0, 0, 0.8);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+  
+  .hero-subtitle {
+    font-size: var(--fs-xl);
+    color: var(--light-blue);
+    text-shadow: 0 0 8px rgba(96, 165, 250, 0.6);
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .hero-tagline {
+    font-size: var(--fs-base);
+    margin-bottom: var(--spacing-xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: var(--fs-3xl);
+    text-shadow: 
+      0 0 12px rgba(147, 197, 253, 1),
+      0 0 25px rgba(59, 130, 246, 0.8),
+      1px 1px 2px rgba(0, 0, 0, 0.9);
+  }
+  
+  .hero-subtitle {
+    font-size: var(--fs-lg);
   }
 }
